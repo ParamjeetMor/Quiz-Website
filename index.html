@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background-color: #3498db;
+
+    }
+
+    .container {
+        position: absolute;
+        top: 50%;
+        left: 48%;
+
+    }
+
+    .container button {
+        font-size: 1.5rem;
+        padding: 6px 15px;
+        border: none;
+        border-radius: 2rem;
+        font-weight: 600;
+    }
+
+    .container button:hover {
+        background-color: #193f58;
+        color: white;
+        transition: all ease 0.5s;
+    }
+
+
+    .main {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    #box {
+        width: 40%;
+        box-shadow: 0px 0px 5px grey;
+        background-color: white;
+        border-radius: 5px;
+        display: none;
+    }
+
+    .row {
+        width: 100%;
+        margin: 2rem;
+        margin-left: 0;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 5px;
+        font-size: 20px;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        background-color: #3498db;
+    }
+</style>
+
+<body>
+
+    <div class="container">
+        <button id="start">Start Quiz</button>
+    </div>
+
+    <div class="main">
+        <div id="box">
+            <h2 id="quesBox"> 1. This is the dummy Question</h2>
+            <div class="row">
+                <input class="options" id="option1" type="radio" value="a" name="option">
+                <label for="option1"> Option 1</label>
+            </div>
+            <div class="row">
+                <input class="options" id="option2" type="radio" value="b" name="option">
+                <label for="option2"> Option 2</label>
+            </div>
+            <div class="row">
+                <input class="options" id="option3" type="radio" value="c" name="option">
+                <label for="option3"> Option 3</label>
+            </div>
+            <div class="row">
+                <input class="options" id="option4" type="radio" value="d" name="option">
+                <label for="option4"> Option 4</label>
+            </div>
+            <button class="btn" onclick="submitQuiz()">Submit</button>
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <script>
+        const questions = [
+            {
+                'que': "Which of the following is a markup language",
+                'a': "HTML",
+                'b': "CSS",
+                'c': "Javascript",
+                'd': 'PHP',
+                'correct': 'a'
+            },
+            {
+                'que': "What year was javascript launched?",
+                'a': "1996",
+                'b': "1995",
+                'c': "1994",
+                'd': "none of the above",
+                'correct': 'b'
+            },
+            {
+                'que': "Which of the following element is responsible for making the text bold in HTML?",
+                'a': "<pre>",
+                'b': "<a>",
+                'c': "<b>",
+                'd': "<br>",
+                'correct': 'c'
+            },
+            {
+                'que': "Which of the following tag is used for inserting the largest heading in HTML?",
+                'a': "<h3>",
+                'b': "<h1>",
+                'c': "<h5>",
+                'd': "<h6>",
+                'correct': 'b'
+            },
+            {
+                'que': "Which of the following tag is used to insert a line-break in HTML?",
+                'a': "<br>",
+                'b': "<a>",
+                'c': "<pre>",
+                'd': "<b>",
+                'correct': 'a'
+            }
+        ]
+
+        const main = document.querySelector("#box")
+        const container = document.querySelector(".container")
+        const start = document.querySelector("#start")
+        start.addEventListener("click", function () {
+            main.style.display = 'block'
+            container.style.display = "none"
+        })
+
+        let index = 0;
+        let total = questions.length;
+        let right = 0;
+        let wrong = 0;
+        const quesBox = document.getElementById("quesBox")
+        const optionInputs = document.querySelectorAll(".options")
+        const loadQuestion = () => {
+            if (index == total) {
+                return endQuiz()
+            }
+            reset();
+            const data = questions[index]
+            quesBox.innerText = `${index + 1}) ${data.que}`
+            optionInputs[0].nextElementSibling.innerText = data.a;
+            optionInputs[1].nextElementSibling.innerText = data.b;
+            optionInputs[2].nextElementSibling.innerText = data.c;
+            optionInputs[3].nextElementSibling.innerText = data.d;
+        }
+
+        const submitQuiz = () => {
+            const data = questions[index];
+            const ans = getAnswer()
+            if (ans == data.correct) {
+                right++;
+            }
+            else {
+                wrong++;
+            }
+            index++
+            loadQuestion()
+            return;
+        }
+
+        const getAnswer = () => {
+            let answer;
+            optionInputs.forEach(
+                (input) => {
+                    if (input.checked) {
+                        answer = input.value;
+
+                    }
+                })
+            return answer;
+        }
+
+
+        const reset = () => {
+            optionInputs.forEach(
+                (input) => {
+                    input.checked = false;
+                }
+            )
+        }
+
+        const endQuiz = () => {
+            document.getElementById("box").innerHTML = `<h3>Thankyou playing the Quiz</h3>
+        <h2>${right}/ ${total} are correct. </h2>`
+
+        }
+        loadQuestion();
+
+
+
+
+
+    </script>
+</body>
+
+</html>

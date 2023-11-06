@@ -161,6 +161,8 @@
         const main = document.querySelector("#box")
         const container = document.querySelector(".container")
         const start = document.querySelector("#start")
+        const quesBox = document.getElementById("quesBox")
+        const optionInputs = document.querySelectorAll(".options")
         start.addEventListener("click", function () {
             main.style.display = 'block'
             container.style.display = "none"
@@ -170,8 +172,6 @@
         let total = questions.length;
         let right = 0;
         let wrong = 0;
-        const quesBox = document.getElementById("quesBox")
-        const optionInputs = document.querySelectorAll(".options")
         const loadQuestion = () => {
             if (index == total) {
                 return endQuiz()

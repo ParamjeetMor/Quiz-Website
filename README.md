@@ -5,17 +5,18 @@ A Quiz Website by using HTML, CSS and Javascript
 
 ## live version:
 
- https://paramjeetmor.github.io/Flower-Shop-Website/
+ https://paramjeetmor.github.io/Quiz-Website/
 
 
 ## Learning Points
 
-- Poisitioning
+- Javascript
 - Hover Effect
 - Styling Images
-- Adding Icons
+
 
 ## Created using
 
 - HTML
 - CSS
+- Javascript

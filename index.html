@@ -19,9 +19,11 @@
     }
 
     .container {
-        position: absolute;
-        top: 50%;
-        left: 48%;
+        height: 100vh;
+        width: 100vw;
+       display: flex;
+       align-items: center;
+       justify-content: center;
 
     }
 
@@ -47,14 +49,17 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
+        padding: 2rem;
     }
 
     #box {
-        width: 40%;
+        width: 50%;
         box-shadow: 0px 0px 5px grey;
         background-color: white;
         border-radius: 5px;
         display: none;
+        padding: 1rem;
+ 
     }
 
     .row {
@@ -73,9 +78,21 @@
         border-radius: 5px;
         background-color: #3498db;
     }
+    
+    .btn:hover{
+        background-color: #193f58;
+        color: white;
+        transition: all ease 0.5s;
+    }
+  @media (max-width:600px) {
+    #box{
+        width: 70%;
+    }
+  }
 </style>
 
 <body>
+
 
     <div class="container">
         <button id="start">Start Quiz</button>
@@ -105,6 +122,7 @@
 
         </div>
     </div>
+
 
 
 
@@ -304,8 +322,9 @@
         }
 
         const endQuiz = () => {
-            document.getElementById("box").innerHTML = `<h3>Thanks for  playing the Quiz</h3>
+            main.innerHTML = `<h3>Thanks for  playing the Quiz</h3>
         <h2>${right}/ ${total} are correct. </h2>`
+       
 
         }
         loadQuestion();
